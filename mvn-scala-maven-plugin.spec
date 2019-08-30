@@ -4,15 +4,18 @@
 #
 Name     : mvn-scala-maven-plugin
 Version  : 3.4.4
-Release  : 2
+Release  : 3
 URL      : https://github.com/davidB/scala-maven-plugin/archive/3.4.4.tar.gz
 Source0  : https://github.com/davidB/scala-maven-plugin/archive/3.4.4.tar.gz
-Source1  : https://repo.maven.apache.org/maven2/net/alchim31/maven/scala-maven-plugin/3.4.4/scala-maven-plugin-3.4.4.jar
-Source2  : https://repo.maven.apache.org/maven2/net/alchim31/maven/scala-maven-plugin/3.4.4/scala-maven-plugin-3.4.4.pom
+Source1  : https://repo.maven.apache.org/maven2/net/alchim31/maven/scala-maven-plugin/3.2.2/scala-maven-plugin-3.2.2.jar
+Source2  : https://repo.maven.apache.org/maven2/net/alchim31/maven/scala-maven-plugin/3.2.2/scala-maven-plugin-3.2.2.pom
+Source3  : https://repo.maven.apache.org/maven2/net/alchim31/maven/scala-maven-plugin/3.4.4/scala-maven-plugin-3.4.4.jar
+Source4  : https://repo.maven.apache.org/maven2/net/alchim31/maven/scala-maven-plugin/3.4.4/scala-maven-plugin-3.4.4.pom
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : Unlicense
 Requires: mvn-scala-maven-plugin-data = %{version}-%{release}
+Requires: mvn-scala-maven-plugin-license = %{version}-%{release}
 
 %description
 # Scala Maven Plugin
@@ -26,16 +29,33 @@ Group: Data
 data components for the mvn-scala-maven-plugin package.
 
 
+%package license
+Summary: license components for the mvn-scala-maven-plugin package.
+Group: Default
+
+%description license
+license components for the mvn-scala-maven-plugin package.
+
+
 %prep
+%setup -q -n scala-maven-plugin-3.4.4
 
 %build
 
 %install
-mkdir -p %{buildroot}/usr/share/java/.m2/repository/net/alchim31/maven/scala-maven-plugin/3.4.4
-cp %{SOURCE1} %{buildroot}/usr/share/java/.m2/repository/net/alchim31/maven/scala-maven-plugin/3.4.4
+mkdir -p %{buildroot}/usr/share/package-licenses/mvn-scala-maven-plugin
+cp UNLICENSE %{buildroot}/usr/share/package-licenses/mvn-scala-maven-plugin/UNLICENSE
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/net/alchim31/maven/scala-maven-plugin/3.2.2
+cp %{SOURCE1} %{buildroot}/usr/share/java/.m2/repository/net/alchim31/maven/scala-maven-plugin/3.2.2/scala-maven-plugin-3.2.2.jar
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/net/alchim31/maven/scala-maven-plugin/3.2.2
+cp %{SOURCE2} %{buildroot}/usr/share/java/.m2/repository/net/alchim31/maven/scala-maven-plugin/3.2.2/scala-maven-plugin-3.2.2.pom
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/net/alchim31/maven/scala-maven-plugin/3.4.4
-cp %{SOURCE2} %{buildroot}/usr/share/java/.m2/repository/net/alchim31/maven/scala-maven-plugin/3.4.4
+cp %{SOURCE3} %{buildroot}/usr/share/java/.m2/repository/net/alchim31/maven/scala-maven-plugin/3.4.4/scala-maven-plugin-3.4.4.jar
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/net/alchim31/maven/scala-maven-plugin/3.4.4
+cp %{SOURCE4} %{buildroot}/usr/share/java/.m2/repository/net/alchim31/maven/scala-maven-plugin/3.4.4/scala-maven-plugin-3.4.4.pom
 
 
 %files
@@ -43,5 +63,11 @@ cp %{SOURCE2} %{buildroot}/usr/share/java/.m2/repository/net/alchim31/maven/scal
 
 %files data
 %defattr(-,root,root,-)
+/usr/share/java/.m2/repository/net/alchim31/maven/scala-maven-plugin/3.2.2/scala-maven-plugin-3.2.2.jar
+/usr/share/java/.m2/repository/net/alchim31/maven/scala-maven-plugin/3.2.2/scala-maven-plugin-3.2.2.pom
 /usr/share/java/.m2/repository/net/alchim31/maven/scala-maven-plugin/3.4.4/scala-maven-plugin-3.4.4.jar
 /usr/share/java/.m2/repository/net/alchim31/maven/scala-maven-plugin/3.4.4/scala-maven-plugin-3.4.4.pom
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/mvn-scala-maven-plugin/UNLICENSE
